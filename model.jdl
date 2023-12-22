@@ -1,8 +1,3 @@
-// Entities
-
-entity UserApp {
-    phone String required
-}
 
 entity Department {
     name String required,
@@ -34,29 +29,16 @@ entity Comment {
 
 // Relationships
 
-relationship ManyToOne {
-    Incident{assignedUser} to UserApp,
-    Incident{department} to Department,
-    Incident{priority} to Priority,
-    Incident{status} to Status
-}
-
 relationship OneToMany {
-    Incident{comments} to Comment,
-    Department{incidents} to Incident,
-    Priority{incidents} to Incident,
-    Status{incidents} to Incident,
-    UserApp{createdIncidents} to Incident,
-    UserApp{assignedIncidents} to Incident
+    Incident to Comment,
+    Department to Incident,
+    Priority to Incident,
+    Status to Incident,
+
 }
 
-// Additional Configurations
+relationship ManyToOne {
+    Incident{user} to User with builtInEntity
+}
 
-// Pagination for entities User, Department, Incident, etc.
-paginate UserApp, Department, Incident with infinite-scroll
 
-// DTO generation with MapStruct
-dto * with mapstruct
-
-// Service generation for all entities
-service all with serviceImpl
