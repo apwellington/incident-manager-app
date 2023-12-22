@@ -1,0 +1,30 @@
+{
+  "annotations": {
+    "changelogDate": "20231221191115"
+  },
+  "applications": "*",
+  "entityTableName": "priority",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "level",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "Priority",
+  "relationships": [
+    {
+      "otherEntityName": "incident",
+      "otherEntityRelationshipName": "priority",
+      "relationshipName": "incident",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity Incident.
+    -->
+    <changeSet id="20231221191315-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="incident"
+                                 constraintName="fk_incident__user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="department_id"
+                                 baseTableName="incident"
+                                 constraintName="fk_incident__department_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="department"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="priority_id"
+                                 baseTableName="incident"
+                                 constraintName="fk_incident__priority_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="priority"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="status_id"
+                                 baseTableName="incident"
+                                 constraintName="fk_incident__status_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="status"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="user_app_id"
+                                 baseTableName="incident"
+                                 constraintName="fk_incident__user_app_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user_app"
+                                 />
+    </changeSet>
+</databaseChangeLog>

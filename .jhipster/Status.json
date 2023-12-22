@@ -1,0 +1,29 @@
+{
+  "annotations": {
+    "changelogDate": "20231221191215"
+  },
+  "applications": "*",
+  "entityTableName": "status",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Status",
+  "relationships": [
+    {
+      "otherEntityName": "incident",
+      "otherEntityRelationshipName": "status",
+      "relationshipName": "incident",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

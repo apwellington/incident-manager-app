@@ -1,0 +1,86 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (incident) {
+      <div>
+        <h2 data-cy="incidentDetailsHeading"><span jhiTranslate="incidentManagerApp.incident.detail.title">Incident</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ incident.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="incidentManagerApp.incident.title">Title</span></dt>
+          <dd>
+            <span>{{ incident.title }}</span>
+          </dd>
+          <dt><span jhiTranslate="incidentManagerApp.incident.description">Description</span></dt>
+          <dd>
+            <span>{{ incident.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="incidentManagerApp.incident.creationDate">Creation Date</span></dt>
+          <dd>
+            <span>{{ incident.creationDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="incidentManagerApp.incident.updateDate">Update Date</span></dt>
+          <dd>
+            <span>{{ incident.updateDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="incidentManagerApp.incident.resolutionDate">Resolution Date</span></dt>
+          <dd>
+            <span>{{ incident.resolutionDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="incidentManagerApp.incident.user">User</span></dt>
+          <dd>
+            <span>{{ incident.user?.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="incidentManagerApp.incident.department">Department</span></dt>
+          <dd>
+            @if (incident.department) {
+              <div>
+                <a [routerLink]="['/department', incident.department.id, 'view']">{{ incident.department.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="incidentManagerApp.incident.priority">Priority</span></dt>
+          <dd>
+            @if (incident.priority) {
+              <div>
+                <a [routerLink]="['/priority', incident.priority.id, 'view']">{{ incident.priority.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="incidentManagerApp.incident.status">Status</span></dt>
+          <dd>
+            @if (incident.status) {
+              <div>
+                <a [routerLink]="['/status', incident.status.id, 'view']">{{ incident.status.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="incidentManagerApp.incident.userApp">User App</span></dt>
+          <dd>
+            @if (incident.userApp) {
+              <div>
+                <a [routerLink]="['/user-app', incident.userApp.id, 'view']">{{ incident.userApp.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/incident', incident.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

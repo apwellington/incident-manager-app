@@ -1,0 +1,26 @@
+{
+  "incidentManagerApp": {
+    "priority": {
+      "home": {
+        "title": "Priorities",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Priority",
+        "createOrEditLabel": "Crear o editar Priority",
+        "notFound": "Ningún Priorities encontrado"
+      },
+      "created": "Un nuevo Priority ha sido creado con el identificador {{ param }}",
+      "updated": "Un Priority ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Priority ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Priority {{ id }}?"
+      },
+      "detail": {
+        "title": "Priority"
+      },
+      "id": "ID",
+      "name": "Name",
+      "level": "Level",
+      "incident": "Incident"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "annotations": {
+    "changelogDate": "20231221190915"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "entityTableName": "user_app",
+  "fields": [
+    {
+      "fieldName": "phone",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "UserApp",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityName": "incident",
+      "otherEntityRelationshipName": "userApp",
+      "relationshipName": "incident",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

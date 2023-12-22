@@ -1,0 +1,179 @@
+<div>
+  <h2 id="page-heading" data-cy="IncidentHeading">
+    <span jhiTranslate="incidentManagerApp.incident.home.title">Incidents</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="incidentManagerApp.incident.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-incident"
+        [routerLink]="['/incident/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="incidentManagerApp.incident.home.createLabel">Create a new Incident</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (incidents?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="incidentManagerApp.incident.home.notFound">No Incidents found</span>
+    </div>
+  }
+
+  @if (incidents && incidents.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="title">
+              <div class="d-flex">
+                <span jhiTranslate="incidentManagerApp.incident.title">Title</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="description">
+              <div class="d-flex">
+                <span jhiTranslate="incidentManagerApp.incident.description">Description</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="creationDate">
+              <div class="d-flex">
+                <span jhiTranslate="incidentManagerApp.incident.creationDate">Creation Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="updateDate">
+              <div class="d-flex">
+                <span jhiTranslate="incidentManagerApp.incident.updateDate">Update Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="resolutionDate">
+              <div class="d-flex">
+                <span jhiTranslate="incidentManagerApp.incident.resolutionDate">Resolution Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="user.id">
+              <div class="d-flex">
+                <span jhiTranslate="incidentManagerApp.incident.user">User</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="department.id">
+              <div class="d-flex">
+                <span jhiTranslate="incidentManagerApp.incident.department">Department</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="priority.id">
+              <div class="d-flex">
+                <span jhiTranslate="incidentManagerApp.incident.priority">Priority</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="status.id">
+              <div class="d-flex">
+                <span jhiTranslate="incidentManagerApp.incident.status">Status</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="userApp.id">
+              <div class="d-flex">
+                <span jhiTranslate="incidentManagerApp.incident.userApp">User App</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (incident of incidents; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/incident', incident.id, 'view']">{{ incident.id }}</a>
+              </td>
+              <td>{{ incident.title }}</td>
+              <td>{{ incident.description }}</td>
+              <td>{{ incident.creationDate | formatMediumDatetime }}</td>
+              <td>{{ incident.updateDate | formatMediumDatetime }}</td>
+              <td>{{ incident.resolutionDate | formatMediumDatetime }}</td>
+              <td>
+                {{ incident.user?.id }}
+              </td>
+              <td>
+                @if (incident.department) {
+                  <div>
+                    <a [routerLink]="['/department', incident.department.id, 'view']">{{ incident.department.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (incident.priority) {
+                  <div>
+                    <a [routerLink]="['/priority', incident.priority.id, 'view']">{{ incident.priority.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (incident.status) {
+                  <div>
+                    <a [routerLink]="['/status', incident.status.id, 'view']">{{ incident.status.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (incident.userApp) {
+                  <div>
+                    <a [routerLink]="['/user-app', incident.userApp.id, 'view']">{{ incident.userApp.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/incident', incident.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/incident', incident.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(incident)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>
